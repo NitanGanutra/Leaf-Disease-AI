@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriVision | AI Crop Disease Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Dynamic Background Elements -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <i class='bx bx-leaf text-gradient'></i>
+                <h1>Agri<span class="text-gradient">Vision</span></h1>
+            </div>
+            <p class="subtitle">Deep Learning Crop Diagnostic Assistant</p>
+        </header>
+
+        <!-- Main Upload Section -->
+        <main class="glass-card upload-section" id="uploadCard">
+            <div class="upload-area" id="dropZone">
+                <i class='bx bx-cloud-upload upload-icon'></i>
+                <h2>Tap or drag to upload leaf image</h2>
+                <p>Supports mobile camera & high-res images</p>
+                <input type="file" id="fileInput" accept="image/*" capture="environment" hidden>
+                <button class="btn-primary" onclick="document.getElementById('fileInput').click()">
+                    <i class='bx bx-camera'></i> Open Camera / Files
+                </button>
+            </div>
+            
+            <!-- Image Preview Section (Hidden Initially) -->
+            <div class="preview-area hidden" id="previewArea">
+                <img id="imagePreview" alt="Leaf Preview">
+                <div class="action-buttons">
+                    <button class="btn-secondary" id="reselectBtn"><i class='bx bx-refresh'></i> Retake</button>
+                    <button class="btn-primary" id="analyzeBtn">
+                        <i class='bx bx-scan'></i> Analyze AI
+                    </button>
+                </div>
+            </div>
+
+            <!-- Loading Indicator -->
+            <div class="loader-container hidden" id="loader">
+                <div class="spinner"></div>
+                <p>Neural Network Analyzing Features...</p>
+            </div>
+        </main>
+
+        <!-- Results Section (Hidden Initially) -->
+        <section class="glass-card results-section hidden" id="resultsCard">
+            <div class="result-header">
+                <h2>Analysis Results</h2>
+                <span class="confidence-badge" id="confidenceBadge">98% Match</span>
+            </div>
+            
+            <div class="disease-info">
+                <h3><i class='bx bx-bug text-gradient'></i> <span id="diseaseName">Apple Scab</span></h3>
+                <p class="scientific-name" id="scientificName">Apple___Apple_scab</p>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4><i class='bx bx-search-alt'></i> Symptoms</h4>
+                    <p id="symptomsText">Loading symptoms...</p>
+                </div>
+                <div class="info-card highlight">
+                    <h4><i class='bx bx-plus-medical'></i> AI Suggested Treatment</h4>
+                    <p id="treatmentText">Loading treatment plan...</p>
+                </div>
+            </div>
+            
+            <button class="btn-primary full-width mt-4" id="resetBtn">Analyze Another Plant</button>
+        </section>
+
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

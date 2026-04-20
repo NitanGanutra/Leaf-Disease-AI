@@ -1,0 +1,50 @@
+{
+  "0": {
+    "name": "Potato___Early_blight",
+    "common_name": "Potato Early Blight",
+    "symptoms": "Dark brown spots with concentric rings (target-like) on older leaves.",
+    "treatment": "Apply copper-based fungicides. Ensure crop rotation and remove infected debris."
+  },
+  "1": {
+    "name": "Potato___Late_blight",
+    "common_name": "Potato Late Blight",
+    "symptoms": "Water-soaked dark spots that spread rapidly; white mold on underside.",
+    "treatment": "Use fungicides immediately (Mancozeb). Destroy heavily infected plants."
+  },
+  "2": {
+    "name": "Potato___healthy",
+    "common_name": "Healthy Potato",
+    "symptoms": "No symptoms. Leaf is green, firm, and vigorous.",
+    "treatment": "Maintain regular watering and organic fertilization."
+  },
+  "3": {
+    "name": "Tomato___Bacterial_spot",
+    "common_name": "Tomato Bacterial Spot",
+    "symptoms": "Small, greasy, water-soaked spots on leaves; can lead to leaf drop.",
+    "treatment": "Apply copper bactericides. Avoid overhead watering to prevent spread."
+  },
+  "4": {
+    "name": "Tomato___Early_blight",
+    "common_name": "Tomato Early Blight",
+    "symptoms": "Irregular brown spots with target-like rings on lower leaves.",
+    "treatment": "Improve air circulation by pruning lower leaves. Use chlorothalonil sprays."
+  },
+  "5": {
+    "name": "Tomato___Late_blight",
+    "common_name": "Tomato Late Blight",
+    "symptoms": "Large, dark, water-soaked lesions on leaves and stems; rapid wilting.",
+    "treatment": "Remove infected plants. Use preventive fungicides during cool, humid weather."
+  },
+  "6": {
+    "name": "Tomato___Leaf_Mold",
+    "common_name": "Tomato Leaf Mold",
+    "symptoms": "Yellow spots on top, olive-green fuzzy mold on the bottom of leaves.",
+    "treatment": "Reduce humidity and increase ventilation. Fungicides can help if severe."
+  },
+  "7": {
+    "name": "Tomato___healthy",
+    "common_name": "Healthy Tomato",
+    "symptoms": "Vibrant green leaves, no spots, no wilting, and lush growth.",
+    "treatment": "Ensure consistent moisture and support with stakes or cages."
+  }
+}
