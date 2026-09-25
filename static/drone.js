@@ -36,6 +36,53 @@ document.addEventListener('DOMContentLoaded', async () => {
     await fetchMissionData();
     setupEventListeners();
     updateActiveWaypointUI(0);
+
+    // Support instant preview mode for demonstrations and screenshots
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('preview') === '1') {
+        const wp3 = DEFAULT_COORDS.waypoints[2];
+        droneMarker.setLatLng([wp3.lat, wp3.lng]);
+        updateHUD("ACTIVE", 30.0, 5.2, 92.0, wp3.lat, wp3.lng, 62);
+        selectWaypoint(2);
+        await loadSamplePreset('tomato_early_blight', false);
+        displayDiagnosis({
+            waypoint_id: 3,
+            waypoint_name: "Waypoint 3 - Tomato Test Plot Alpha",
+            crop_zone: "Sector C (Tomato)",
+            lat: 28.61560,
+            lng: 77.20960,
+            confidence: 97.4,
+            common_name: "Tomato Early Blight",
+            disease_name: "Tomato___Early_blight",
+            health_status: "DISEASE_DETECTED",
+            risk_label: "Pathogen Detected - Action Recommended",
+            symptoms: "Dark brown lesions with concentric rings (target spot) on lower foliage.",
+            treatment: "Targeted copper fungicide spray; improve row spacing to lower canopy humidity.",
+            timestamp: new Date().toLocaleTimeString()
+        });
+        addDiseaseHotspotToMap({
+            waypoint_id: 1,
+            waypoint_name: "Waypoint 1 - North Potato Zone",
+            lat: DEFAULT_COORDS.waypoints[0].lat,
+            lng: DEFAULT_COORDS.waypoints[0].lng,
+            health_status: "HEALTHY",
+            common_name: "Healthy Potato",
+            confidence: 99.1,
+            risk_label: "Optimal Plant Vigor",
+            treatment: "Maintain regular irrigation and organic fertilizer."
+        });
+        addDiseaseHotspotToMap({
+            waypoint_id: 3,
+            waypoint_name: "Waypoint 3 - Tomato Test Plot Alpha",
+            lat: wp3.lat,
+            lng: wp3.lng,
+            health_status: "DISEASE_DETECTED",
+            common_name: "Tomato Early Blight",
+            confidence: 97.4,
+            risk_label: "Pathogen Detected - Action Recommended",
+            treatment: "Targeted copper fungicide spray."
+        });
+    }
 });
 
 /**

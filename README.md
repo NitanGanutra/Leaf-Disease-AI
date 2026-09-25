@@ -5,35 +5,43 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-Latest-009688)](https://fastapi.tiangolo.com/)
 [![Leaflet](https://img.shields.io/badge/GIS-Leaflet.js-green)](https://leafletjs.com/)
 
-**Agri-AI** is an end-to-end precision agriculture platform combining **Deep Learning (PyTorch MobileNetV2)** with a **Simulated UAV Mission & GIS Field Mapping System**. 
+**Agri-AI** is a precision agriculture platform combining a **PyTorch MobileNetV2 Deep Learning Diagnostic Engine** with an **Autonomous UAV Mission Simulation & GIS Field Mapping System**. 
 
-The system achieves **99.3% validation accuracy** across common Potato and Tomato foliar diseases, and bridges aerial waypoint surveillance with localized agronomic pathogen diagnoses.
+The system achieves **99.3% validation accuracy** across common foliar diseases in Potato and Tomato crops, and bridges aerial waypoint surveillance with spatial pathogen tracking.
+
+---
+
+## 📱 Dashboard Previews
+
+### 🚁 Simulated UAV Autonomous Mission & GIS Field Mapping Dashboard
+![AgriVision UAV Dashboard Preview](./assets/uav_dashboard_preview.png)
+
+### 🌱 Standard Leaf Diagnostic Scanner
+![AgriVision Scanner Preview](./assets/sample_output.png)
 
 ---
 
 ## 🚁 System Architecture
 
 ```text
-              🚁 SIMULATED UAV
-                    │
-                    ▼ (GPS / Waypoint Trajectory)
-          Mission / Flight Path
-                    │
-                    ▼ (Aerial Imagery)
-          Crop Specimen Capture
-                    │
-                    ▼
-          FastAPI Backend Server
-                    │
-                    ▼
-        Agri-AI Diagnostic Model
-          MobileNetV2 + PyTorch
-                    │
-                    ▼
-          Disease Prediction & Confidence
-                    │
-                    ▼
-       📍 Field Disease Hotspots on Map
+              🚁 SIMULATED UAV MISSION
+                         │
+                         ▼ (Waypoints & Flight Trajectory)
+               Field Inspection Point (GPS Geo-Tag)
+                         │
+                         ▼ (Aerial Crop Foliage)
+               FastAPI Backend Server (/drone/analyze)
+                         │
+                         ▼
+             Agri-AI Diagnostic Model
+              MobileNetV2 + PyTorch
+                         │
+                         ▼
+               Disease Classification (99.3% Accuracy)
+                         │
+                         ▼
+            📍 Interactive Field GIS Map
+             (Color-Coded Disease Hotspots & Treatments)
 ```
 
 ---
@@ -43,7 +51,7 @@ The system achieves **99.3% validation accuracy** across common Potato and Tomat
 ### 1. 🌿 Deep Learning Crop Doctor (99.3% Precision)
 - Fine-tuned **MobileNetV2** CNN with transfer learning.
 - Identifies 8 agricultural classes across Potato and Tomato crops (Early Blight, Late Blight, Bacterial Spot, Leaf Mold, Healthy).
-- Confidence threshold guard prevents misidentifications of unclassified leaves.
+- **Confidence Threshold Guard (85%):** Prevents misidentifications on out-of-distribution or non-crop foliage.
 - Delivers actionable agronomic symptoms and immediate chemical/organic treatments.
 
 ### 2. 🚁 Simulated UAV Autonomous Mission Module
@@ -62,30 +70,43 @@ The system achieves **99.3% validation accuracy** across common Potato and Tomat
 
 ---
 
-## 📂 Project Structure
+## 📂 Project Structure (UAV Precision Agri-AI Architecture)
 
 ```text
 Leaf-Disease-AI/
 │
-├── dataset/                  # PlantVillage training/validation sets
-├── model/               
-│   ├── disease_model.pth     # 99.3% accurate trained weights
-│   ├── inference.py          # PyTorch inference pipeline & threshold guard
-│   └── disease_info.json     # Botanical disease symptoms & treatments
+├── assets/
+│   ├── uav_dashboard_preview.png  # 🚁 UAV autonomous mission & GIS map screenshot
+│   └── sample_output.png          # 📱 Standard foliar diagnostic screenshot
 │
-├── static/              
-│   ├── index.html            # Standard leaf scanner web UI
-│   ├── style.css             # Standard scanner styles
-│   ├── app.js                # Standard scanner client logic
-│   │
-│   ├── drone.html            # 🚁 NEW: UAV mission & field map dashboard
-│   ├── drone.css             # 🚁 NEW: Telemetry HUD & radar glassmorphism styling
-│   └── drone.js              # 🚁 NEW: Leaflet map, flight loop, and AI hotspot plotting
+├── drone_simulator.py             # 🚁 [UAV Engine] Waypoint navigation & telemetry simulator
+│                                  #    - Field sector coordinates (Sectors A, B, C, D)
+│                                  #    - Real-time GPS, altitude, speed, battery degradation
+│                                  #    - Inspection ledger linking AI diagnoses to GIS waypoints
 │
-├── drone_simulator.py        # 🚁 NEW: Waypoint mission & telemetry engine
-├── main.py                   # FastAPI server with UAV & diagnostic endpoints
-├── train.py                  # Model training script
-└── requirements.txt          # Python dependencies
+├── main.py                        # ⚡ [FastAPI Server] High-concurrency REST endpoints:
+│                                  #    - GET  /drone           : Serves UAV GIS dashboard
+│                                  #    - GET  /drone/mission   : Coordinates & flight plan
+│                                  #    - GET  /drone/telemetry : Real-time UAV flight dynamics
+│                                  #    - POST /drone/analyze   : Deep learning diagnosis + geo-tagging
+│                                  #    - POST /predict         : Standard leaf diagnostic API
+│
+├── model/                         # 🧠 [Deep Learning Core - 99.3% Validation Accuracy]
+│   ├── disease_model.pth          #    - Fine-tuned MobileNetV2 weights (PlantVillage)
+│   ├── inference.py               #    - Preprocessing, inference pipeline, & 85% confidence guard
+│   └── disease_info.json          #    - Symptoms, pathogen etiology, & agronomic chemical treatments
+│
+├── static/                        # 🎨 [Frontend GIS & User Interface]
+│   ├── drone.html                 #    - 🚁 UAV telemetry HUD & Leaflet interactive map page
+│   ├── drone.css                  #    - 🚁 Dark glassmorphic radar & pulsing hotspot styling
+│   ├── drone.js                   #    - 🚁 Drone flight loop, heading calculation, & GIS pin plotting
+│   ├── index.html                 #    - 🌱 Standard leaf scanner web application
+│   ├── style.css                  #    - 🌱 Standard scanner CSS styles
+│   └── app.js                     #    - 🌱 Standard scanner camera & upload logic
+│
+├── dataset/                       # 🌿 PlantVillage Dataset (Potato & Tomato classes)
+├── train.py                       # 🏋️ Model training & transfer learning pipeline
+└── requirements.txt               # 📦 Python project dependencies
 ```
 
 ---
@@ -115,6 +136,6 @@ uvicorn main:app --host 127.0.0.1 --port 8000 --reload
 ---
 
 ## 🎯 Defensible Interview & Resume Points
-- *"Engineered an autonomous UAV mission simulation module linking aerial waypoint GPS coordinates with a PyTorch MobileNetV2 crop pathology classifier."*
-- *"Implemented real-time telemetry tracking (altitude, velocity, battery, flight paths) and visualized field disease hotspots on an interactive Leaflet GIS map."*
+- *"Architected an autonomous UAV mission simulation module linking aerial waypoint GPS coordinates with a PyTorch MobileNetV2 crop pathology classifier."*
+- *"Implemented real-time telemetry tracking (altitude, velocity, battery draw, flight paths) and visualized field disease hotspots on an interactive Leaflet GIS map."*
 - *"Maintained 99.3% classification accuracy with a confidence threshold guard for out-of-distribution leaves."*
