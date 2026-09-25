@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriVision UAV | Simulated Crop Health Monitoring</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <!-- Leaflet CSS for Interactive Field Mapping -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="/static/drone.css">
+</head>
+<body>
+
+    <!-- Dynamic Atmosphere Background -->
+    <div class="uav-bg-gradient"></div>
+    <div class="radar-grid-bg"></div>
+
+    <!-- Navigation Header -->
+    <header class="uav-nav">
+        <div class="nav-brand">
+            <i class='bx bxs-navigation brand-icon'></i>
+            <div>
+                <span class="brand-title">Agri<span class="text-gradient">Vision</span> UAV</span>
+                <span class="brand-badge">Simulated Mission</span>
+            </div>
+        </div>
+        <div class="nav-actions">
+            <a href="/" class="nav-btn"><i class='bx bx-scan'></i> Standard Leaf Scanner</a>
+            <a href="https://github.com/NitanGanutra/Leaf-Disease-AI" target="_blank" class="nav-btn"><i class='bx bxl-github'></i> Repo</a>
+        </div>
+    </header>
+
+    <!-- Real-Time Telemetry HUD Bar -->
+    <section class="telemetry-strip">
+        <div class="hud-pill">
+            <div class="hud-icon"><i class='bx bx-broadcast'></i></div>
+            <div class="hud-data">
+                <span class="hud-label">UAV Unit</span>
+                <span class="hud-value" id="hudDroneId">UAV-01</span>
+            </div>
+        </div>
+        <div class="hud-pill">
+            <div class="hud-icon"><i class='bx bx-compass'></i></div>
+            <div class="hud-data">
+                <span class="hud-label">Flight Status</span>
+                <span class="hud-value"><span class="status-badge standby" id="hudFlightStatus">STANDBY</span></span>
+            </div>
+        </div>
+        <div class="hud-pill">
+            <div class="hud-icon"><i class='bx bx-up-arrow-alt'></i></div>
+            <div class="hud-data">
+                <span class="hud-label">Altitude (AGL)</span>
+                <span class="hud-value" id="hudAltitude">0.0 m</span>
+            </div>
+        </div>
+        <div class="hud-pill">
+            <div class="hud-icon"><i class='bx bx-tachometer'></i></div>
+            <div class="hud-data">
+                <span class="hud-label">Ground Speed</span>
+                <span class="hud-value" id="hudSpeed">0.0 m/s</span>
+            </div>
+        </div>
+        <div class="hud-pill">
+            <div class="hud-icon"><i class='bx bx-battery'></i></div>
+            <div class="hud-data">
+                <span class="hud-label">Battery</span>
+                <span class="hud-value" id="hudBattery">98%</span>
+            </div>
+        </div>
+        <div class="hud-pill">
+            <div class="hud-icon"><i class='bx bx-map-pin'></i></div>
+            <div class="hud-data">
+                <span class="hud-label">GPS Lock</span>
+                <span class="hud-value" id="hudGps">3D-DGPS (14 Sats)</span>
+            </div>
+        </div>
+        <div class="hud-pill">
+            <div class="hud-icon"><i class='bx bx-target-lock'></i></div>
+            <div class="hud-data">
+                <span class="hud-label">Waypoint</span>
+                <span class="hud-value" id="hudWaypoint">Base Pad</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Mission Grid -->
+    <main class="dashboard-grid">
+
+        <!-- Left Panel: Interactive Field Map & Mission Planner -->
+        <section class="map-container-panel">
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title"><i class='bx bx-map-alt text-gradient'></i> Field Agricultural Survey Map</div>
+                        <div class="card-subtitle">GPS Waypoint Grid • Live Drone Telemetry • Crop Pathogen Hotspots</div>
+                    </div>
+                    <div style="font-size: 0.8rem; color: var(--secondary);">
+                        <i class='bx bx-radar'></i> High-Res Spatial Scan
+                    </div>
+                </div>
+
+                <div class="map-wrapper">
+                    <div id="fieldMap"></div>
+                    <!-- Live overlay HUD in map -->
+                    <div class="map-telemetry-overlay" id="mapOverlay">
+                        <div class="overlay-row"><span class="overlay-lbl">LAT:</span><span class="overlay-val" id="ovLat">28.613500</span></div>
+                        <div class="overlay-row"><span class="overlay-lbl">LNG:</span><span class="overlay-val" id="ovLng">77.208500</span></div>
+                        <div class="overlay-row"><span class="overlay-lbl">HEADING:</span><span class="overlay-val" id="ovHeading">045° NE</span></div>
+                        <div class="overlay-row"><span class="overlay-lbl">MODE:</span><span class="overlay-val" id="ovMode">SIMULATION</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission Planner & Flight Control -->
+            <div class="card mission-controls-card">
+                <div class="card-title" style="margin-bottom: 0.8rem;">
+                    <i class='bx bx-slider-alt text-gradient'></i> UAV Mission Planner & Flight Commands
+                </div>
+                <div class="mission-controls-grid">
+                    <div class="control-input-group">
+                        <label for="missionAltitude">Flight Altitude (m)</label>
+                        <input type="number" id="missionAltitude" value="30" min="10" max="100">
+                    </div>
+                    <div class="control-input-group">
+                        <label for="missionSpeed">Survey Speed (m/s)</label>
+                        <input type="number" id="missionSpeed" value="5.2" step="0.5" min="1" max="15">
+                    </div>
+                    <div class="control-input-group">
+                        <label for="missionPattern">Survey Pattern</label>
+                        <select id="missionPattern">
+                            <option value="grid">Cross-Hatch Grid</option>
+                            <option value="perimeter">Perimeter Boundary</option>
+                            <option value="spot">Target Hotspots</option>
+                        </select>
+                    </div>
+                    <div class="control-input-group">
+                        <label for="missionCoverage">Survey Area</label>
+                        <input type="text" id="missionCoverage" value="3.8 Hectares" readonly>
+                    </div>
+                </div>
+
+                <div class="mission-btn-row">
+                    <button class="btn-ctrl start" id="btnStartFlight">
+                        <i class='bx bx-play-circle'></i> Start Mission
+                    </button>
+                    <button class="btn-ctrl demo" id="btnAutoSurvey">
+                        <i class='bx bx-radar'></i> Autonomous Survey Demo
+                    </button>
+                    <button class="btn-ctrl pause" id="btnPauseFlight">
+                        <i class='bx bx-pause-circle'></i> Pause
+                    </button>
+                    <button class="btn-ctrl reset" id="btnResetFlight">
+                        <i class='bx bx-home-alt'></i> Return / Reset Base
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Panel: Aerial Crop Analysis & Hotspot Telemetry Log -->
+        <section class="analysis-panel">
+            
+            <!-- Panel Navigation Tabs -->
+            <div class="panel-tabs">
+                <button class="tab-btn active" id="tabBtnInspection" onclick="switchTab('inspection')">
+                    <i class='bx bx-camera'></i> Aerial Crop Diagnosis
+                </button>
+                <button class="tab-btn" id="tabBtnLog" onclick="switchTab('log')">
+                    <i class='bx bx-list-check'></i> Field Hotspots (<span id="hotspotCount">0</span>)
+                </button>
+            </div>
+
+            <!-- Tab 1: Inspection & AI Diagnosis -->
+            <div class="card" id="tabInspectionContent">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title"><i class='bx bx-scan text-gradient'></i> Waypoint Leaf Diagnosis</div>
+                        <div class="card-subtitle">Connect aerial crop sample to MobileNetV2 AI Engine</div>
+                    </div>
+                </div>
+
+                <!-- Current Waypoint Banner -->
+                <div class="active-wp-strip">
+                    <div class="wp-title-row">
+                        <span class="wp-name" id="currentWpTitle">Waypoint 1 - North Potato Zone</span>
+                        <span class="wp-tag" id="currentWpTag">Sector A (Potato)</span>
+                    </div>
+                    <div class="wp-coords" id="currentWpCoords">GPS: 28.614200° N, 77.208900° E • Alt: 30m</div>
+                </div>
+
+                <!-- Leaf Upload Area -->
+                <div class="upload-box" id="uavUploadBox">
+                    <i class='bx bx-cloud-upload'></i>
+                    <h4>Select or Drop Aerial Crop Photo</h4>
+                    <p>Feeds leaf image into Deep Learning CNN</p>
+                    <input type="file" id="uavFileInput" accept="image/*" hidden>
+                </div>
+
+                <!-- Quick Simulation Test Samples -->
+                <div class="quick-samples">
+                    <div class="samples-label">Quick Test Crop Samples:</div>
+                    <div class="samples-btn-group">
+                        <button class="sample-chip" onclick="loadSamplePreset('potato_early_blight')">
+                            <i class='bx bx-bug'></i> Potato Early Blight
+                        </button>
+                        <button class="sample-chip" onclick="loadSamplePreset('potato_healthy')">
+                            <i class='bx bx-check-circle'></i> Healthy Potato
+                        </button>
+                        <button class="sample-chip" onclick="loadSamplePreset('tomato_early_blight')">
+                            <i class='bx bx-bug'></i> Tomato Early Blight
+                        </button>
+                        <button class="sample-chip" onclick="loadSamplePreset('tomato_bacterial_spot')">
+                            <i class='bx bx-error-circle'></i> Tomato Bacterial
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Image Preview -->
+                <div class="aerial-preview-box hidden" id="uavPreviewBox">
+                    <img id="uavImagePreview" src="" alt="Aerial Crop Specimen">
+                </div>
+
+                <!-- Analyze Button -->
+                <div class="analyze-action-bar">
+                    <button class="btn-analyze" id="btnAnalyzeImage">
+                        <i class='bx bx-brain'></i> Run Deep Learning Diagnosis
+                    </button>
+                </div>
+
+                <!-- Diagnosis Result Box -->
+                <div class="diagnosis-container hidden" id="diagnosisBox">
+                    <div class="diag-header">
+                        <div class="diag-title-area">
+                            <h3 id="diagCommonName">Tomato Early Blight</h3>
+                            <div class="diag-scientific" id="diagScientificName">Tomato___Early_blight</div>
+                        </div>
+                        <span class="diag-conf-badge danger" id="diagConfidenceBadge">97.2% Match</span>
+                    </div>
+
+                    <div class="diag-detail-box">
+                        <div class="diag-section-title"><i class='bx bx-info-circle'></i> Field Status</div>
+                        <p class="diag-section-text" id="diagFieldStatus" style="font-weight: 600; color: #f87171;">
+                            ⚠️ Pathogen Detected at Active Waypoint
+                        </p>
+                    </div>
+
+                    <div class="diag-detail-box">
+                        <div class="diag-section-title"><i class='bx bx-pulse'></i> Symptoms Observed</div>
+                        <p class="diag-section-text" id="diagSymptoms">
+                            Irregular brown spots with concentric target-like rings on foliage.
+                        </p>
+                    </div>
+
+                    <div class="diag-detail-box">
+                        <div class="diag-section-title"><i class='bx bx-first-aid'></i> Recommended Agronomic Action</div>
+                        <p class="diag-section-text" id="diagTreatment">
+                            Targeted fungicide application to Sector C; isolate perimeter row.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 2: Field Hotspot History & Analytics -->
+            <div class="card hidden" id="tabLogContent">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title"><i class='bx bx-radar text-gradient'></i> Field Hotspot & Health Log</div>
+                        <div class="card-subtitle">Waypoint GIS inspection history & severity classification</div>
+                    </div>
+                </div>
+
+                <div class="inspections-table-wrapper" id="inspectionsList">
+                    <p style="color: var(--text-muted); font-size: 0.88rem; text-align: center; padding: 2rem 0;">
+                        No waypoint inspections recorded yet. Start flight and analyze crops to generate field logs.
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Drone Simulation Script -->
+    <script src="/static/drone.js"></script>
+</body>
+</html>

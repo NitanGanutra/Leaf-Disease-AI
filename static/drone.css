@@ -1,0 +1,810 @@
+:root {
+    --bg-dark: #0b1120;
+    --bg-surface: #131d31;
+    --bg-card: rgba(19, 29, 49, 0.85);
+    --primary: #10b981;
+    --primary-glow: rgba(16, 185, 129, 0.4);
+    --secondary: #06b6d4;
+    --accent: #3b82f6;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --glass-bg: rgba(19, 29, 49, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --border-highlight: rgba(16, 185, 129, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Background Atmosphere */
+.uav-bg-gradient {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at 15% 15%, rgba(16, 185, 129, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(6, 182, 212, 0.1) 0%, transparent 45%),
+                radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.8) 0%, var(--bg-dark) 100%);
+    z-index: -2;
+    pointer-events: none;
+}
+
+.radar-grid-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-size: 40px 40px;
+    background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Navbar */
+.uav-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.9rem 2rem;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--glass-border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-icon {
+    font-size: 1.8rem;
+    color: var(--primary);
+    filter: drop-shadow(0 0 10px var(--primary-glow));
+    animation: droneHover 3s ease-in-out infinite alternate;
+}
+
+@keyframes droneHover {
+    0% { transform: translateY(0px) rotate(0deg); }
+    100% { transform: translateY(-4px) rotate(3deg); }
+}
+
+.brand-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.brand-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    background: rgba(6, 182, 212, 0.15);
+    color: var(--secondary);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    padding: 3px 8px;
+    border-radius: 6px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-1px);
+}
+
+.nav-btn.primary {
+    background: linear-gradient(135deg, var(--primary), #059669);
+    border: none;
+    box-shadow: 0 2px 10px var(--primary-glow);
+}
+
+.nav-btn.primary:hover {
+    box-shadow: 0 4px 18px rgba(16, 185, 129, 0.5);
+}
+
+/* Telemetry HUD Bar */
+.telemetry-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+    gap: 12px;
+    padding: 1rem 2rem;
+    background: rgba(11, 17, 32, 0.8);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.hud-pill {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    padding: 8px 14px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: border-color 0.2s;
+}
+
+.hud-pill:hover {
+    border-color: var(--border-highlight);
+}
+
+.hud-icon {
+    font-size: 1.4rem;
+    color: var(--secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hud-data {
+    display: flex;
+    flex-direction: column;
+}
+
+.hud-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.hud-value {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.status-badge.standby { background: rgba(148, 163, 184, 0.2); color: #cbd5e1; }
+.status-badge.active { background: rgba(16, 185, 129, 0.2); color: #10b981; animation: pulseGlow 1.5s infinite; }
+.status-badge.surveying { background: rgba(6, 182, 212, 0.2); color: #06b6d4; }
+.status-badge.rth { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+
+@keyframes pulseGlow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Dashboard Layout */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 20px;
+    padding: 1.5rem 2rem;
+    flex: 1;
+}
+
+@media (max-width: 1100px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Left Panel: Map & Mission Planner */
+.map-container-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(14px);
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 1rem 1.4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.card-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-subtitle {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Map Frame */
+.map-wrapper {
+    position: relative;
+    height: 480px;
+    width: 100%;
+}
+
+#fieldMap {
+    height: 100%;
+    width: 100%;
+    background: #0f172a;
+}
+
+/* Custom Map Overlay Controls */
+.map-telemetry-overlay {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 500;
+    background: rgba(11, 17, 32, 0.88);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    pointer-events: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.overlay-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.overlay-lbl { color: var(--text-muted); }
+.overlay-val { font-weight: 600; color: var(--secondary); }
+
+/* Mission Controls */
+.mission-controls-card {
+    padding: 1.2rem 1.4rem;
+}
+
+.mission-controls-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+    margin-bottom: 1rem;
+}
+
+.control-input-group label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+.control-input-group input, .control-input-group select {
+    width: 100%;
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid var(--glass-border);
+    color: var(--text-main);
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+}
+
+.control-input-group input:focus, .control-input-group select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.mission-btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.btn-ctrl {
+    flex: 1;
+    min-width: 130px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.btn-ctrl.start {
+    background: linear-gradient(135deg, var(--primary), #059669);
+    color: white;
+    box-shadow: 0 2px 10px var(--primary-glow);
+}
+
+.btn-ctrl.start:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+}
+
+.btn-ctrl.demo {
+    background: linear-gradient(135deg, var(--secondary), #0284c7);
+    color: white;
+}
+
+.btn-ctrl.demo:hover {
+    box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4);
+}
+
+.btn-ctrl.pause {
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--warning);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.btn-ctrl.pause:hover {
+    background: rgba(245, 158, 11, 0.25);
+}
+
+.btn-ctrl.reset {
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.btn-ctrl.reset:hover {
+    background: rgba(239, 68, 68, 0.25);
+}
+
+/* Right Panel: AI Aerial Inspection & Field Log */
+.analysis-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Tabs */
+.panel-tabs {
+    display: flex;
+    background: rgba(15, 23, 42, 0.6);
+    border-radius: 12px;
+    padding: 4px;
+    border: 1px solid var(--glass-border);
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.tab-btn.active {
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--primary);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+/* Active Waypoint Card */
+.active-wp-strip {
+    background: rgba(16, 185, 129, 0.06);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin: 1.2rem 1.4rem 0.8rem 1.4rem;
+}
+
+.wp-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.wp-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.wp-tag {
+    font-size: 0.7rem;
+    background: rgba(6, 182, 212, 0.15);
+    color: var(--secondary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.wp-coords {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+/* Image Upload & Quick Samples */
+.upload-box {
+    margin: 0.8rem 1.4rem;
+    border: 2px dashed rgba(16, 185, 129, 0.25);
+    border-radius: 14px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: rgba(15, 23, 42, 0.4);
+}
+
+.upload-box:hover, .upload-box.dragover {
+    border-color: var(--primary);
+    background: rgba(16, 185, 129, 0.05);
+}
+
+.upload-box i {
+    font-size: 2.2rem;
+    color: var(--primary);
+    margin-bottom: 6px;
+}
+
+.upload-box h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.upload-box p {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+/* Sample Quick Picker */
+.quick-samples {
+    margin: 0 1.4rem 1rem 1.4rem;
+}
+
+.samples-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.samples-btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.sample-chip {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    color: var(--text-main);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.sample-chip:hover {
+    background: rgba(16, 185, 129, 0.2);
+    border-color: var(--primary);
+    color: #fff;
+}
+
+/* Image Preview */
+.aerial-preview-box {
+    margin: 0.5rem 1.4rem;
+    text-align: center;
+    position: relative;
+}
+
+.aerial-preview-box img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+}
+
+.analyze-action-bar {
+    margin: 0.8rem 1.4rem 1.2rem 1.4rem;
+}
+
+.btn-analyze {
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary), #059669);
+    color: white;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 14px var(--primary-glow);
+    transition: all 0.25s ease;
+}
+
+.btn-analyze:hover {
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+    transform: translateY(-1px);
+}
+
+/* Diagnosis Result Card */
+.diagnosis-container {
+    margin: 0 1.4rem 1.4rem 1.4rem;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    padding: 1.2rem;
+    animation: fadeIn 0.4s ease forwards;
+}
+
+.diag-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 10px;
+}
+
+.diag-title-area h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.diag-scientific {
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--text-muted);
+}
+
+.diag-conf-badge {
+    padding: 4px 10px;
+    border-radius: 16px;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.diag-conf-badge.healthy {
+    background: rgba(16, 185, 129, 0.2);
+    color: var(--primary);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.diag-conf-badge.danger {
+    background: rgba(239, 68, 68, 0.2);
+    color: var(--danger);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.diag-conf-badge.warning {
+    background: rgba(245, 158, 11, 0.2);
+    color: var(--warning);
+    border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.diag-detail-box {
+    margin-top: 10px;
+}
+
+.diag-section-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.diag-section-text {
+    font-size: 0.82rem;
+    color: #cbd5e1;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+/* Field Log & History */
+.inspections-table-wrapper {
+    padding: 1.2rem 1.4rem;
+    max-height: 480px;
+    overflow-y: auto;
+}
+
+.log-item {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: border-color 0.2s;
+}
+
+.log-item:hover {
+    border-color: var(--border-highlight);
+}
+
+.log-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.log-status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.log-status-dot.healthy { background: var(--primary); box-shadow: 0 0 6px var(--primary); }
+.log-status-dot.disease { background: var(--danger); box-shadow: 0 0 6px var(--danger); }
+.log-status-dot.unknown { background: var(--warning); box-shadow: 0 0 6px var(--warning); }
+
+.log-wp-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.log-sub {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.log-right {
+    text-align: right;
+}
+
+.log-disease {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.log-disease.healthy { color: var(--primary); }
+.log-disease.disease { color: var(--danger); }
+.log-disease.unknown { color: var(--warning); }
+
+.log-conf {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hidden { display: none !important; }
+
+/* Custom Leaflet Map Icons & Styles */
+.drone-leaflet-icon {
+    font-size: 26px;
+    text-shadow: 0 0 12px #06b6d4, 0 0 20px #06b6d4;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wp-marker-label {
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+.disease-hotspot-pin {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    animation: hotspotPulse 1.8s infinite;
+}
+
+@keyframes hotspotPulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+    70% { transform: scale(1.15); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.leaflet-popup-content-wrapper {
+    background: rgba(15, 23, 42, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border) !important;
+    color: #f8fafc !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6) !important;
+}
+
+.leaflet-popup-tip {
+    background: rgba(15, 23, 42, 0.95) !important;
+}

@@ -31,9 +31,9 @@ def load_model():
     if model_path.exists():
         # Load the weights you generated in train.py
         model.load_state_dict(torch.load(model_path, map_location=device))
-        print(f"✅ Model weights loaded successfully on {device}")
+        print(f"[OK] Model weights loaded successfully on {device}")
     else:
-        print(f"⚠️ WARNING: {model_path} not found. Model will use random weights (Inference will be garbage).")
+        print(f"[WARNING] {model_path} not found. Model will use random weights (Inference will be garbage).")
     
     model.to(device)
     model.eval()

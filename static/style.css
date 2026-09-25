@@ -315,3 +315,29 @@ button {
     .action-buttons { flex-direction: column; }
     .btn-primary, .btn-secondary { width: 100%; }
 }
+
+/* UAV Mission Launch Button */
+.uav-launch-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(6, 182, 212, 0.12);
+    border: 1px solid rgba(6, 182, 212, 0.4);
+    color: #38bdf8;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(6, 182, 212, 0.15);
+}
+
+.uav-launch-btn:hover {
+    background: rgba(6, 182, 212, 0.25);
+    border-color: #38bdf8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(6, 182, 212, 0.35);
+    color: #ffffff;
+}
+
