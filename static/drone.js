@@ -198,7 +198,41 @@ async function fetchMissionData() {
         const res = await fetch('/drone/mission');
         if (res.ok) {
             missionData = await res.json();
-            console.log("Mission loaded:", missionData);
+            console.log("Shared mission loaded:", missionData);
+            if (missionData && missionData.target && missionData.target.disease && missionData.target.disease !== 'None') {
+                const target = missionData.target;
+                document.getElementById('currentWpTitle').textContent = target.sector_name || 'Active Target Sector';
+                document.getElementById('currentWpTag').textContent = `${target.crop} (${target.severity || 'Moderate'})`;
+                document.getElementById('currentWpCoords').textContent = `GPS: ${target.lat.toFixed(6)}° N, ${target.lng.toFixed(6)}° E • ${target.is_simulated_gps ? 'Simulated' : 'Farmer Field'}`;
+                
+                displayDiagnosis({
+                    waypoint_id: 3,
+                    waypoint_name: target.sector_name,
+                    crop_zone: target.crop,
+                    lat: target.lat,
+                    lng: target.lng,
+                    confidence: target.confidence || 95.0,
+                    common_name: `${target.crop} - ${target.disease}`,
+                    disease_name: target.disease,
+                    health_status: target.severity === 'Healthy' ? 'HEALTHY' : 'DISEASE_DETECTED',
+                    risk_label: target.severity === 'Healthy' ? 'Optimal Plant Vigor' : 'Pathogen Outbreak - Surveillance Active',
+                    symptoms: `Field symptoms actively monitored by UAV-01 at ${target.sector_name}.`,
+                    treatment: "Refer to unified platform Recommended Actions for full agronomic guidance.",
+                    timestamp: target.timestamp || new Date().toLocaleTimeString()
+                });
+
+                addDiseaseHotspotToMap({
+                    waypoint_id: 3,
+                    lat: target.lat,
+                    lng: target.lng,
+                    health_status: target.severity === 'Healthy' ? 'HEALTHY' : 'DISEASE_DETECTED',
+                    common_name: `${target.crop} - ${target.disease}`,
+                    waypoint_name: target.sector_name,
+                    confidence: target.confidence || 95.0,
+                    risk_label: target.severity,
+                    treatment: "Active surveillance hotspot."
+                });
+            }
         }
     } catch (err) {
         console.warn("Could not fetch remote mission data, using defaults:", err);

@@ -1,50 +1,368 @@
 {
   "0": {
+    "crop": "Potato",
     "name": "Potato___Early_blight",
     "common_name": "Potato Early Blight",
-    "symptoms": "Dark brown spots with concentric rings (target-like) on older leaves.",
-    "treatment": "Apply copper-based fungicides. Ensure crop rotation and remove infected debris."
+    "scientific_name": "Alternaria solani",
+    "pathogen_type": "Fungal",
+    "severity_default": "Moderate",
+    "causes": "Caused by the fungus Alternaria solani. The fungus overwinters in infected crop debris, solanaceous weeds, or soil. It thrives in warm temperatures (24°C to 29°C / 75°F to 85°F) with alternating wet and dry periods, frequent dew, or overhead irrigation.",
+    "symptoms": "Dark brown to black necrotic spots with characteristic concentric rings creating a 'target-board' pattern, primarily starting on older lower leaves. Surrounding tissue often turns chlorotic (yellow). Severe infections lead to premature defoliation and tuber quality loss.",
+    "treatment": "Apply copper-based fungicides or chlorothalonil following verified product-label instructions. Practice 3-year crop rotation and sanitize field tools.",
+    "recommended_actions": {
+      "immediate_actions": [
+        "Inspect lower canopy immediately and manually prune heavily infected leaves with disinfected shears.",
+        "Remove and safely burn or deep-bury infected plant residues away from the field; do not compost.",
+        "Discontinue overhead sprinkler irrigation immediately to keep foliage dry."
+      ],
+      "organic_options": [
+        "Apply organic-certified copper octanoate or copper hydroxide spray early in the morning.",
+        "Apply biological bio-fungicides based on Bacillus subtilis or Trichoderma harzianum to colonize leaf surfaces.",
+        "Use neem seed kernel extract (NSKE 5%) as a botanical preventive deterrent."
+      ],
+      "treatment_methods": [
+        "When using protective fungicides, ensure complete spray coverage on both upper and lower leaf surfaces.",
+        "Strictly adhere to manufacturer label instructions and local agricultural extension guidelines regarding safety intervals and dilution; do not guess chemical dosages.",
+        "Rotate fungicide chemical classes (FRAC codes) to avoid pathogen resistance build-up."
+      ],
+      "irrigation_fertilizer": [
+        "Switch to drip irrigation or furrow irrigation; avoid splashing water onto stems and foliage.",
+        "Water early in the morning so incidental moisture evaporates rapidly under sunlight.",
+        "Avoid excessive nitrogen fertilization which produces soft, susceptible foliage; maintain adequate potassium and phosphorus."
+      ],
+      "prevention": [
+        "Implement a strict 3-year crop rotation avoiding other Solanaceous crops (tomatoes, peppers, eggplants).",
+        "Use certified disease-free seed tubers.",
+        "Maintain wider plant and row spacing (30-35 cm within rows, 75 cm between rows) to promote rapid canopy drying."
+      ],
+      "when_to_consult_expert": "Consult your local Krishi Vigyan Kendra (KVK) or agricultural extension specialist if target spots spread to more than 15% of the total canopy area within 48 hours despite initial copper treatment."
+    }
   },
   "1": {
+    "crop": "Potato",
     "name": "Potato___Late_blight",
     "common_name": "Potato Late Blight",
-    "symptoms": "Water-soaked dark spots that spread rapidly; white mold on underside.",
-    "treatment": "Use fungicides immediately (Mancozeb). Destroy heavily infected plants."
+    "scientific_name": "Phytophthora infestans",
+    "pathogen_type": "Oomycete (Water Mold)",
+    "severity_default": "Severe",
+    "causes": "Caused by the oomycete Phytophthora infestans. Spreads rapidly through windblown sporangia during cool (12°C to 18°C night, 18°C to 22°C day), excessively wet or foggy weather with relative humidity above 90%. Overwinters in cull piles and infected seed tubers.",
+    "symptoms": "Irregular, water-soaked dark green to purplish-black lesions that expand rapidly across leaves and stems. In humid conditions, a delicate white fuzzy fungal-like growth appears on the underside of affected leaves. Vines collapse rapidly, emitting a distinct foul odor.",
+    "treatment": "Immediately isolate affected sectors. Apply registered systemic/protectant oomycete fungicides (e.g. Mancozeb, Cymoxanil) following exact label rates. Destroy heavily blighted plants.",
+    "recommended_actions": {
+      "immediate_actions": [
+        "Immediately flag and quarantine the infected zone; prevent workers and machinery from moving from wet blighted areas to healthy plots.",
+        "Uproot and bag severely infected plants in plastic bags on-site before carrying them away to avoid airborne spore dispersion.",
+        "Halt all overhead irrigation and eliminate standing field water pools."
+      ],
+      "organic_options": [
+        "Apply preventive copper hydroxide formulations prior to anticipated rain spells.",
+        "Apply bio-control agents (Bacillus amyloliquefaciens) during early vegetative stages as a preventive barrier.",
+        "Certified organic growers must monitor daily weather forecasts for blight warning alerts."
+      ],
+      "treatment_methods": [
+        "Apply registered protective fungicides (e.g., Mancozeb or Chlorothalonil) as a preventive shield according to official label directions and local extension guidelines.",
+        "Under high disease pressure, follow state agricultural university advisory for approved systemic oomycete treatments.",
+        "Always wear personal protective equipment (PPE) during any spray application."
+      ],
+      "irrigation_fertilizer": [
+        "Cease irrigation during prolonged overcast or foggy weather.",
+        "Ensure field drainage ditches are clear to eliminate standing water.",
+        "Avoid late-season nitrogen applications which delay canopy maturity and heighten blight vulnerability."
+      ],
+      "prevention": [
+        "Plant only certified disease-free, inspected seed potatoes.",
+        "Destroy all potato cull piles and volunteer potato sprouts before the growing season begins.",
+        "Hill potatoes thoroughly with at least 10-15 cm of soil cover to protect developing tubers from washing spores."
+      ],
+      "when_to_consult_expert": "Late Blight is an agricultural emergency. Notify your local plant health clinic or district agricultural officer immediately upon first confirmed identification."
+    }
   },
   "2": {
+    "crop": "Potato",
     "name": "Potato___healthy",
     "common_name": "Healthy Potato",
-    "symptoms": "No symptoms. Leaf is green, firm, and vigorous.",
-    "treatment": "Maintain regular watering and organic fertilization."
+    "scientific_name": "Solanum tuberosum",
+    "pathogen_type": "None",
+    "severity_default": "Healthy",
+    "causes": "Optimal agronomic care, balanced nutrition, clean seed stock, and favorable weather conditions.",
+    "symptoms": "Leaves are uniform vibrant green, crisp, and fully expanded without necrotic spots, chlorotic halos, or wilting. Stems are sturdy, erect, and free of lesions.",
+    "treatment": "Maintain balanced fertigation, routine pest scouting, and consistent moisture management.",
+    "recommended_actions": {
+      "immediate_actions": [
+        "Continue routine weekly field monitoring.",
+        "Ensure hilling remains intact to shield growing tubers from sunlight and opportunistic soil spores.",
+        "Keep records of growth stages (tuber initiation, bulking)."
+      ],
+      "organic_options": [
+        "Apply fermented compost tea or sea-kelp extract as a foliar tonic to enhance natural plant immunity.",
+        "Maintain beneficial predatory insect habitats along field borders."
+      ],
+      "treatment_methods": [
+        "No chemical fungicides are required.",
+        "Ensure spray equipment is cleaned and ready should sudden regional disease alerts be issued."
+      ],
+      "irrigation_fertilizer": [
+        "Maintain consistent soil moisture (65-75% available soil water capacity) during critical tuber bulking.",
+        "Apply balanced N-P-K fertilizer based on soil testing; incorporate potassium sulfate for sturdy cell wall formation."
+      ],
+      "prevention": [
+        "Continue regular scouting for Colorado potato beetles, aphids, and leafhoppers.",
+        "Maintain weed-free rows to promote good airflow and lower canopy humidity."
+      ],
+      "when_to_consult_expert": "Consult extension services if unexpected widespread leaf yellowing or sudden wilting occurs despite adequate soil moisture."
+    }
   },
   "3": {
+    "crop": "Tomato",
     "name": "Tomato___Bacterial_spot",
     "common_name": "Tomato Bacterial Spot",
-    "symptoms": "Small, greasy, water-soaked spots on leaves; can lead to leaf drop.",
-    "treatment": "Apply copper bactericides. Avoid overhead watering to prevent spread."
+    "scientific_name": "Xanthomonas vesicatoria / perforans",
+    "pathogen_type": "Bacterial",
+    "severity_default": "Moderate",
+    "causes": "Bacterial infection caused by Xanthomonas species. Survives on volunteer tomato plants, infected seed, and crop residue. Spreads through driving rain, overhead irrigation, and handling wet foliage during warm, humid conditions (25°C to 30°C).",
+    "symptoms": "Small (less than 3 mm), dark brown, water-soaked circular to angular lesions on leaves, often surrounded by yellow halos. Lesion centers may dry up and drop out, creating a 'shot-hole' effect. Green fruit develop raised, scab-like blister spots.",
+    "treatment": "Apply fixed copper bactericides tank-mixed with mancozeb as recommended by local university extension. Avoid overhead irrigation and sanitize tools.",
+    "recommended_actions": {
+      "immediate_actions": [
+        "Do not cultivate, prune, or harvest while tomato foliage is wet to prevent bacterial spread.",
+        "Remove and bag heavily infected lower leaf branches; sanitize pruning shears with 70% isopropyl alcohol between plants.",
+        "Shift immediately from overhead irrigation to drip irrigation."
+      ],
+      "organic_options": [
+        "Spray OMRI-listed fixed copper bactericides mixed with biologicals like Bacillus subtilis.",
+        "Apply copper octanoate early in disease progression according to label directions."
+      ],
+      "treatment_methods": [
+        "Apply preventive copper bactericide sprays in combination with mancozeb according to authorized agricultural guidelines.",
+        "Ensure thorough coverage of both upper and lower foliage surfaces; spray during calm morning hours.",
+        "Never exceed label frequency or concentration to avoid copper phytotoxicity."
+      ],
+      "irrigation_fertilizer": [
+        "Deliver water exclusively at ground level through drip tape; avoid water droplets splashing from soil to lower foliage.",
+        "Ensure adequate calcium and magnesium availability to strengthen epidermal cell integrity."
+      ],
+      "prevention": [
+        "Use certified disease-free, hot-water-treated tomato seeds.",
+        "Practice at least a 2-year crop rotation avoiding tomatoes, peppers, and eggplants.",
+        "Use plastic or straw mulch beneath plants to suppress rain splash from soil."
+      ],
+      "when_to_consult_expert": "Consult your local plant pathologist if bacterial spot covers more than 20% of foliage or if fruit lesions threaten marketability across more than one sector."
+    }
   },
   "4": {
+    "crop": "Tomato",
     "name": "Tomato___Early_blight",
     "common_name": "Tomato Early Blight",
-    "symptoms": "Irregular brown spots with target-like rings on lower leaves.",
-    "treatment": "Improve air circulation by pruning lower leaves. Use chlorothalonil sprays."
+    "scientific_name": "Alternaria linariae / solani",
+    "pathogen_type": "Fungal",
+    "severity_default": "Moderate",
+    "causes": "Fungal pathogen that overwinters on solanaceous crop debris and infested stakes/cages. Spreads via wind, splashing rain, and mechanical contact during warm, humid weather (24°C to 29°C) with persistent leaf wetness.",
+    "symptoms": "Irregular dark brown spots with concentric target-like rings on lower leaves, surrounded by yellow chlorotic halos. As lesions expand, whole leaves yellow, wither, and die, exposing fruits to sunscald. Dark sunken cankers may form on stems.",
+    "treatment": "Prune lower leaves to improve canopy air movement. Apply approved protective fungicides (copper, chlorothalonil) per product labels.",
+    "recommended_actions": {
+      "immediate_actions": [
+        "Prune and discard infected lower leaves up to 30-40 cm above the soil surface to break the ground-splash ladder.",
+        "Sanitize all stakes, clips, and pruning equipment in a 10% bleach solution.",
+        "Ensure plants are securely trellised to keep foliage elevated from the ground."
+      ],
+      "organic_options": [
+        "Apply bio-fungicides based on Bacillus amyloliquefaciens strain D747 or Trichoderma viride.",
+        "Use certified organic copper octanoate sprays every 7-10 days under humid conditions."
+      ],
+      "treatment_methods": [
+        "Apply protective fungicides (Chlorothalonil, Mancozeb, or Copper formulations) strictly following label instructions and local extension spray schedules.",
+        "Start applications early at first detection and alternate chemical classes to mitigate resistance."
+      ],
+      "irrigation_fertilizer": [
+        "Irrigate strictly at soil level using drip irrigation lines; never use overhead sprinklers.",
+        "Maintain steady soil moisture to reduce plant stress; apply balanced fertilizer with sufficient potassium and calcium."
+      ],
+      "prevention": [
+        "Practice a 3-year crop rotation with non-solanaceous crops (maize, beans, brassicas).",
+        "Apply a 5-8 cm layer of clean organic mulch (straw or wood shavings) under tomato rows.",
+        "Select disease-tolerant or resistant tomato varieties when available."
+      ],
+      "when_to_consult_expert": "Contact an agricultural extension officer if lesions ascend into the upper fruiting canopy despite two successive fungicide applications."
+    }
   },
   "5": {
+    "crop": "Tomato",
     "name": "Tomato___Late_blight",
     "common_name": "Tomato Late Blight",
-    "symptoms": "Large, dark, water-soaked lesions on leaves and stems; rapid wilting.",
-    "treatment": "Remove infected plants. Use preventive fungicides during cool, humid weather."
+    "scientific_name": "Phytophthora infestans",
+    "pathogen_type": "Oomycete (Water Mold)",
+    "severity_default": "Severe",
+    "causes": "Devastating oomycete pathogen that spreads long distances on wind currents during cool (15°C to 22°C), humid, and rainy weather. Requires free moisture on foliage to infect.",
+    "symptoms": "Large, irregular, greenish-black water-soaked lesions that spread aggressively across leaves, petioles, and stems. In high humidity, white downy mold appears on leaf undersides. Entire plants rapidly collapse and rot within days; fruits develop greasy, olive-brown blotches.",
+    "treatment": "Isolate the area immediately. Apply labeled systemic/protective late blight fungicides according to official recommendations. Destroy severely blighted vines.",
+    "recommended_actions": {
+      "immediate_actions": [
+        "Flag the affected area and immediately halt worker movement from infected to uninfected rows.",
+        "Immediately bag and remove heavily blighted vines in closed bags during dry mid-day hours.",
+        "Shut down all overhead irrigation systems immediately."
+      ],
+      "organic_options": [
+        "Apply organic copper fungicides as a preventative protective layer before rainy periods.",
+        "Under confirmed late blight outbreaks, organic options are strictly preventative; severely infected plants must be culled."
+      ],
+      "treatment_methods": [
+        "Apply registered late blight protective or curative fungicides according to official regional warning thresholds and label instructions.",
+        "Ensure uniform coverage of both sides of foliage; do not under-dose or exceed maximum seasonal application limits."
+      ],
+      "irrigation_fertilizer": [
+        "Discontinue any irrigation that creates standing water or keeps leaves wet.",
+        "Avoid high-nitrogen fertilizing during high disease-risk weather periods."
+      ],
+      "prevention": [
+        "Do not plant tomatoes in close proximity to potato fields.",
+        "Eliminate volunteer tomato and potato plants from previous seasons.",
+        "Subscribe to regional pest-alert bulletins to initiate preventive sprays before airborne spores reach your field."
+      ],
+      "when_to_consult_expert": "Late Blight is a community-wide plant epidemic. Report any confirmed occurrence to your local extension advisor or district agriculture office within 24 hours."
+    }
   },
   "6": {
+    "crop": "Tomato",
     "name": "Tomato___Leaf_Mold",
     "common_name": "Tomato Leaf Mold",
-    "symptoms": "Yellow spots on top, olive-green fuzzy mold on the bottom of leaves.",
-    "treatment": "Reduce humidity and increase ventilation. Fungicides can help if severe."
+    "scientific_name": "Passalora fulva (syn. Cladosporium fulvum)",
+    "pathogen_type": "Fungal",
+    "severity_default": "Mild",
+    "causes": "Fungal pathogen prevalent in humid conditions, particularly in polyhouses, greenhouses, or high-density field rows with relative humidity greater than 85% and temperatures between 21°C and 24°C.",
+    "symptoms": "Pale greenish-yellow chlorotic spots with indistinct margins appear on the upper surface of older leaves. Corresponding areas on the lower leaf surface develop a velvety, olive-green to brownish fungal sporulation mold. Infected leaves curl, wither, and drop prematurely.",
+    "treatment": "Increase canopy ventilation and lower humidity. Apply copper fungicides or bio-fungicides per verified product guidelines.",
+    "recommended_actions": {
+      "immediate_actions": [
+        "Prune dense suckers and lower shaded leaves to immediately increase air movement through the plant canopy.",
+        "In polyhouses, open all side and ridge vents to reduce internal humidity below 80%.",
+        "Avoid any overhead watering or misting."
+      ],
+      "organic_options": [
+        "Apply bio-fungicides containing Bacillus subtilis or Streptomyces lydicus.",
+        "Use certified organic copper octanoate or sulfur-based protectants as permitted by local standards."
+      ],
+      "treatment_methods": [
+        "Apply approved protectant fungicides (e.g., Chlorothalonil or Copper-based sprays) ensuring complete spray reach on lower leaf undersides.",
+        "Follow product label directions regarding application intervals and pre-harvest intervals."
+      ],
+      "irrigation_fertilizer": [
+        "Irrigate only at root level using drip lines in the morning so surface soil dries before evening.",
+        "Avoid excessive vegetative growth by balancing nitrogen with potassium."
+      ],
+      "prevention": [
+        "Increase spacing between tomato plants (at least 45-60 cm apart) and rows (1.2 to 1.5 m apart).",
+        "Choose leaf-mold resistant tomato hybrids (carrying Cf resistance genes).",
+        "Thoroughly clean and sanitize greenhouse frameworks and trellising twine after each season."
+      ],
+      "when_to_consult_expert": "Consult your agricultural extension office if leaf mold causes premature defoliation of more than 25% of leaves during peak fruit-filling stage."
+    }
   },
   "7": {
+    "crop": "Tomato",
     "name": "Tomato___healthy",
     "common_name": "Healthy Tomato",
-    "symptoms": "Vibrant green leaves, no spots, no wilting, and lush growth.",
-    "treatment": "Ensure consistent moisture and support with stakes or cages."
+    "scientific_name": "Solanum lycopersicum",
+    "pathogen_type": "None",
+    "severity_default": "Healthy",
+    "causes": "Optimal crop nutrition, good soil drainage, regular watering, and effective preventive agronomic management.",
+    "symptoms": "Vibrant, deep-green foliage with no chlorosis, dark spots, or wilting. Vines are vigorously branching, stems are strong and erect, and flower clusters or fruit sets are developing cleanly.",
+    "treatment": "Continue consistent drip irrigation, balanced N-P-K fertilization, staking, and routine pest scouting.",
+    "recommended_actions": {
+      "immediate_actions": [
+        "Maintain current successful agronomic routine.",
+        "Prune non-productive ground suckers to maintain upright plant architecture.",
+        "Ensure stakes, cages, or trellis lines support developing fruit weight."
+      ],
+      "organic_options": [
+        "Apply weekly compost tea or diluted liquid seaweed extract to support root microbiology.",
+        "Release or encourage beneficial natural predators like ladybugs and lacewings."
+      ],
+      "treatment_methods": [
+        "No chemical fungicides or bactericides required.",
+        "Keep spray equipment calibrated and clean for potential future preventive needs."
+      ],
+      "irrigation_fertilizer": [
+        "Deliver consistent moisture (approx. 1 to 1.5 inches of water per week) to prevent fruit cracking and blossom end rot.",
+        "Apply balanced fertilizer with adequate calcium; avoid erratic dry-wet moisture swings."
+      ],
+      "prevention": [
+        "Inspect leaf undersides weekly for early signs of spider mites, whiteflies, or hornworms.",
+        "Keep rows weed-free to prevent harboring alternate viral and insect vectors."
+      ],
+      "when_to_consult_expert": "Consult extension services if uncharacteristic leaf curling or blossom drop occurs under normal temperature and moisture conditions."
+    }
+  },
+  "8": {
+    "crop": "Bell Pepper",
+    "name": "Pepper__bell___Bacterial_spot",
+    "common_name": "Bell Pepper Bacterial Spot",
+    "scientific_name": "Xanthomonas euvesicatoria / vesicatoria",
+    "pathogen_type": "Bacterial",
+    "severity_default": "Moderate",
+    "causes": "Seed-borne bacterial pathogen that also survives on infected crop residues and solanaceous weeds. Spreads rapidly through windblown rain, overhead sprinkler irrigation, and handling wet plants in warm (24°C to 30°C), humid weather.",
+    "symptoms": "Small, water-soaked, circular to irregular lesions (1-3 mm) on leaves that turn brown or black with yellowish-green halos. Infected leaves rapidly turn yellow and drop prematurely, leaving fruit exposed to severe sunscald. On pepper fruits, small raised, blister-like scab lesions develop.",
+    "treatment": "Apply preventive copper bactericide sprays combined with mancozeb per certified label rates. Immediately transition to drip irrigation, sanitize equipment, and remove blighted crop debris.",
+    "recommended_actions": {
+      "immediate_actions": [
+        "Do not enter, prune, or harvest pepper rows while plants are wet with dew or rain.",
+        "Manually rogue out and destroy severely diseased pepper plants in early localized hotspots.",
+        "Immediately switch all watering to ground-level drip lines; eliminate sprinkler use."
+      ],
+      "organic_options": [
+        "Apply approved copper octanoate or basic copper sulfate formulations in the cool of early morning.",
+        "Incorporate biological bactericides (Bacillus amyloliquefaciens or Bacillus subtilis) as a preventive canopy wash.",
+        "Apply potassium silicate foliar sprays to enhance physical leaf cuticular resistance."
+      ],
+      "treatment_methods": [
+        "Apply registered copper bactericide formulations tank-mixed with an approved protectant per local agricultural university guidelines.",
+        "Ensure full coverage across upper and lower pepper leaf surfaces; adhere strictly to label safety intervals and maximum seasonal limits.",
+        "Do not prepare unverified home chemical recipes; use only certified agricultural products."
+      ],
+      "irrigation_fertilizer": [
+        "Maintain uniform moisture via drip irrigation; avoid letting soil dry out completely between waterings.",
+        "Avoid heavy nitrogen top-dressings which trigger excessive succulent foliage prone to bacterial invasion; maintain sufficient potassium."
+      ],
+      "prevention": [
+        "Always purchase certified disease-free, tested pepper seed and transplants.",
+        "Practice a minimum 2-year crop rotation away from all Solanaceous species (peppers, tomatoes, potatoes, eggplants).",
+        "Use plastic or organic straw mulch along planting beds to suppress rain-splash inoculation from soil."
+      ],
+      "when_to_consult_expert": "Consult your district horticultural officer or agricultural university extension specialist if bacterial spot causes rapid leaf drop exceeding 15% across your pepper plot."
+    }
+  },
+  "9": {
+    "crop": "Bell Pepper",
+    "name": "Pepper__bell___healthy",
+    "common_name": "Healthy Bell Pepper (Capsicum)",
+    "scientific_name": "Capsicum annuum",
+    "pathogen_type": "None",
+    "severity_default": "Healthy",
+    "causes": "Optimal agronomic care, pathogen-free seed stock, balanced nutrition, warm sunny climate, and proper drip irrigation management.",
+    "symptoms": "Foliage is uniform glossy green, firm, and upright with smooth margins and no water-soaked spots, chlorosis, or necrotic halos. Stems are sturdy, flowers are setting cleanly, and young bell peppers are developing firm, glossy skin.",
+    "treatment": "Maintain consistent drip irrigation, balanced nutrition with adequate calcium, light staking, and routine scout checks.",
+    "recommended_actions": {
+      "immediate_actions": [
+        "Continue current management routine.",
+        "Stake or cage heavy-bearing pepper plants to prevent branch breakage as peppers expand.",
+        "Scout weekly for thrips, aphids, and hornworms."
+      ],
+      "organic_options": [
+        "Apply bi-weekly foliar applications of sea-kelp extract or worm casting tea for trace mineral support.",
+        "Interplant companion crops like basil or marigolds to deter insect vectors naturally."
+      ],
+      "treatment_methods": [
+        "No chemical pesticides or fungicides are required.",
+        "Clean all weeding and cultivation tools regularly to prevent introducing foreign soil-borne pathogens."
+      ],
+      "irrigation_fertilizer": [
+        "Provide consistent, moderate moisture (approx. 1 inch per week); peppers dislike both waterlogging and drought stress.",
+        "Ensure sufficient available calcium in the root zone to prevent blossom end rot on developing peppers."
+      ],
+      "prevention": [
+        "Maintain clean, weed-free furrows to reduce insect pest pressure.",
+        "Ensure good soil drainage with raised beds or well-aerated loam."
+      ],
+      "when_to_consult_expert": "Consult an extension specialist if unexpected blossom drop occurs during normal temperature ranges (21°C to 29°C)."
+    }
   }
 }

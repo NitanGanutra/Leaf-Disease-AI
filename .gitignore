@@ -3,3 +3,7 @@
 .venv/
 __pycache__/
 *.pth.tar
+install.log
+.vscode/
+static/uploads/*
+!static/uploads/.gitkeep

@@ -3,90 +3,490 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgriVision | AI Crop Disease Detection</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/style.css">
+    <title>Agri-AI | Smart Crop Disease Detection & UAV Platform</title>
+    <!-- Modern Typography & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <!-- Leaflet GIS Map CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
 
-    <!-- Dynamic Background Elements -->
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
+    <!-- Soft Agricultural Ambient Background -->
+    <div class="agri-bg-pattern"></div>
 
-    <div class="container">
-        <!-- Header -->
-        <header>
-            <div class="logo">
-                <i class='bx bx-leaf text-gradient'></i>
-                <h1>Agri<span class="text-gradient">Vision</span></h1>
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+        <a href="#overview" class="nav-brand">
+            <div class="brand-icon-wrapper">
+                <i class='bx bx-leaf'></i>
             </div>
-            <p class="subtitle">Deep Learning Crop Diagnostic Assistant</p>
-            <div style="margin-top: 1rem;">
-                <a href="/drone" class="uav-launch-btn">
-                    <i class='bx bxs-navigation'></i> Launch Simulated UAV Mission Dashboard &rarr;
-                </a>
+            <div>
+                <span class="brand-title">Agri-<span>AI</span></span>
+                <span class="brand-badge">Smart Agriculture 3.0</span>
             </div>
-        </header>
+        </a>
 
-        <!-- Main Upload Section -->
-        <main class="glass-card upload-section" id="uploadCard">
-            <div class="upload-area" id="dropZone">
-                <i class='bx bx-cloud-upload upload-icon'></i>
-                <h2>Tap or drag to upload leaf image</h2>
-                <p>Supports mobile camera & high-res images</p>
+        <nav class="nav-links">
+            <a href="#overview" class="nav-link active">Overview</a>
+            <a href="#detection" class="nav-link">Crop Disease Detection</a>
+            <a href="#analysis" class="nav-link">Disease Analysis</a>
+            <a href="#recommendations" class="nav-link">Recommended Actions</a>
+            <a href="#uav-monitoring" class="nav-link">UAV Drone Monitoring</a>
+            <a href="#history" class="nav-link">Detection History</a>
+        </nav>
+
+        <a href="/drone" class="nav-cta" title="Open Dedicated Drone View">
+            <i class='bx bxs-navigation'></i> Dedicated Drone View
+        </a>
+    </header>
+
+    <main class="main-container">
+
+        <!-- ==========================================
+             SECTION 1: OVERVIEW & CROP SELECTION
+             ========================================== -->
+        <section id="overview" class="section-wrapper">
+            <div class="overview-hero">
+                <div class="hero-content">
+                    <div class="hero-pill">
+                        <i class='bx bx-check-shield'></i> Precision Agriculture Deep Learning & GIS
+                    </div>
+                    <h1 class="hero-title">Integrated Smart Crop Disease Detection & UAV Monitoring Platform</h1>
+                    <p class="hero-description">
+                        Diagnose foliar diseases with 99.3% accuracy across <strong>Tomato</strong>, <strong>Potato</strong>, and <strong>Bell Pepper (Capsicum)</strong>. Every detection automatically calculates severity, delivers crop-specific treatment prescriptions, and coordinates targeted UAV aerial surveillance missions.
+                    </p>
+                </div>
+
+                <!-- Platform Stats Grid -->
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon green"><i class='bx bx-spa'></i></div>
+                        <div class="stat-data">
+                            <h4>3 Crops</h4>
+                            <p>Tomato, Potato, Bell Pepper</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon blue"><i class='bx bx-brain'></i></div>
+                        <div class="stat-data">
+                            <h4>99.3%</h4>
+                            <p>MobileNetV2 Diagnostic Accuracy</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon amber"><i class='bx bx-map-pin'></i></div>
+                        <div class="stat-data">
+                            <h4>5 Sectors</h4>
+                            <p>Simulated Research Farm Plots</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple"><i class='bx bxs-navigation'></i></div>
+                        <div class="stat-data">
+                            <h4>UAV-01</h4>
+                            <p>Autonomous Telemetry Synced</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Crop Selection Bar -->
+                <div class="crop-selector-bar">
+                    <div class="crop-selector-label">
+                        <i class='bx bx-filter-alt'></i> Select Target Crop Filter:
+                    </div>
+                    <div class="crop-tabs">
+                        <button class="crop-tab-btn active" data-crop="auto">
+                            <i class='bx bx-grid-alt'></i> All Crops (Auto-Detect)
+                        </button>
+                        <button class="crop-tab-btn" data-crop="tomato">
+                            <i class='bx bxs-circle' style="color:#ef4444;"></i> Tomato
+                        </button>
+                        <button class="crop-tab-btn" data-crop="potato">
+                            <i class='bx bxs-circle' style="color:#eab308;"></i> Potato
+                        </button>
+                        <button class="crop-tab-btn" data-crop="bell_pepper">
+                            <i class='bx bxs-circle' style="color:#10b981;"></i> Bell Pepper (Capsicum)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             SECTION 2: CROP DISEASE DETECTION UPLOAD
+             ========================================== -->
+        <section id="detection" class="section-wrapper">
+            <div class="section-header">
+                <span class="section-category"><i class='bx bx-scan'></i> Diagnostic Module</span>
+                <h2 class="section-title">Upload Crop Leaf Specimen</h2>
+                <p class="section-subtitle">Take a clear photo or drop an image of a Tomato, Potato, or Bell Pepper leaf</p>
+            </div>
+
+            <!-- Upload Card -->
+            <div class="upload-card" id="dropZone">
+                <div class="upload-icon-wrapper">
+                    <i class='bx bx-cloud-upload'></i>
+                </div>
+                <h3>Tap or Drag & Drop Crop Leaf Photo Here</h3>
+                <p>Supports mobile camera capture, JPG, PNG & high-resolution agricultural scans</p>
                 <input type="file" id="fileInput" accept="image/*" capture="environment" hidden>
-                <button class="btn-primary" onclick="document.getElementById('fileInput').click()">
-                    <i class='bx bx-camera'></i> Open Camera / Files
+                <button class="btn-upload" id="browseBtn" onclick="document.getElementById('fileInput').click()">
+                    <i class='bx bx-camera'></i> Open Camera / Select Photo
                 </button>
             </div>
-            
-            <!-- Image Preview Section (Hidden Initially) -->
-            <div class="preview-area hidden" id="previewArea">
-                <img id="imagePreview" alt="Leaf Preview">
-                <div class="action-buttons">
-                    <button class="btn-secondary" id="reselectBtn"><i class='bx bx-refresh'></i> Retake</button>
-                    <button class="btn-primary" id="analyzeBtn">
-                        <i class='bx bx-scan'></i> Analyze AI
+
+            <!-- Image Preview Box -->
+            <div class="preview-card hidden" id="previewContainer">
+                <img id="leafPreviewImg" class="preview-img" alt="Leaf Preview">
+                <div class="action-row">
+                    <button class="btn-secondary" id="retakeBtn">
+                        <i class='bx bx-refresh'></i> Select Another Photo
+                    </button>
+                    <button class="btn-upload" id="runDiagnosisBtn">
+                        <i class='bx bx-brain'></i> Run Deep Learning Diagnosis & Deploy UAV
                     </button>
                 </div>
             </div>
 
-            <!-- Loading Indicator -->
-            <div class="loader-container hidden" id="loader">
-                <div class="spinner"></div>
-                <p>Neural Network Analyzing Features...</p>
-            </div>
-        </main>
-
-        <!-- Results Section (Hidden Initially) -->
-        <section class="glass-card results-section hidden" id="resultsCard">
-            <div class="result-header">
-                <h2>Analysis Results</h2>
-                <span class="confidence-badge" id="confidenceBadge">98% Match</span>
-            </div>
-            
-            <div class="disease-info">
-                <h3><i class='bx bx-bug text-gradient'></i> <span id="diseaseName">Apple Scab</span></h3>
-                <p class="scientific-name" id="scientificName">Apple___Apple_scab</p>
+            <!-- Scanner Loader -->
+            <div class="scanner-loader hidden" id="scannerLoader">
+                <div class="loader-spinner"></div>
+                <h4 style="font-weight:700; color:var(--primary-dark);">Neural Network Analyzing Foliar Features...</h4>
+                <p style="font-size:0.88rem; color:var(--text-muted); margin-top:4px;">Extracting lesion patterns, estimating severity, and generating precision UAV mission telemetry</p>
             </div>
 
-            <div class="info-grid">
-                <div class="info-card">
-                    <h4><i class='bx bx-search-alt'></i> Symptoms</h4>
-                    <p id="symptomsText">Loading symptoms...</p>
-                </div>
-                <div class="info-card highlight">
-                    <h4><i class='bx bx-plus-medical'></i> AI Suggested Treatment</h4>
-                    <p id="treatmentText">Loading treatment plan...</p>
+            <!-- Quick Test Presets for Instant Demo -->
+            <div class="preset-bar">
+                <div class="preset-title">Quick-Test Crop Presets (Click to Test Instantly):</div>
+                <div class="preset-chips">
+                    <button class="preset-chip" onclick="loadSamplePreset('tomato_early_blight')">
+                        <i class='bx bx-bug' style="color:#ef4444;"></i> Tomato Early Blight
+                    </button>
+                    <button class="preset-chip" onclick="loadSamplePreset('tomato_healthy')">
+                        <i class='bx bx-check-circle' style="color:#10b981;"></i> Healthy Tomato
+                    </button>
+                    <button class="preset-chip" onclick="loadSamplePreset('potato_late_blight')">
+                        <i class='bx bx-error' style="color:#dc2626;"></i> Potato Late Blight
+                    </button>
+                    <button class="preset-chip" onclick="loadSamplePreset('potato_healthy')">
+                        <i class='bx bx-check-circle' style="color:#10b981;"></i> Healthy Potato
+                    </button>
+                    <button class="preset-chip" onclick="loadSamplePreset('pepper_bacterial_spot')">
+                        <i class='bx bx-error-alt' style="color:#d97706;"></i> Bell Pepper Bacterial Spot
+                    </button>
+                    <button class="preset-chip" onclick="loadSamplePreset('pepper_healthy')">
+                        <i class='bx bx-check-circle' style="color:#10b981;"></i> Healthy Bell Pepper
+                    </button>
                 </div>
             </div>
-            
-            <button class="btn-primary full-width mt-4" id="resetBtn">Analyze Another Plant</button>
         </section>
 
-    </div>
+        <!-- ==========================================
+             SECTION 3: DISEASE ANALYSIS RESULTS
+             ========================================== -->
+        <section id="analysis" class="section-wrapper hidden">
+            <div class="section-header">
+                <span class="section-category"><i class='bx bx-chart'></i> Pathology Report</span>
+                <h2 class="section-title">Deep Learning Disease Analysis</h2>
+                <p class="section-subtitle">Real-time classification, severity ranking, and botanical symptom verification</p>
+            </div>
 
+            <div class="diagnosis-hero-card">
+                <div class="diag-top-bar">
+                    <div class="diag-title-group">
+                        <h2 id="diagDiseaseName">Tomato Early Blight</h2>
+                        <div class="diag-scientific" id="diagScientificName">Alternaria solani</div>
+                    </div>
+                    <div class="diag-badges">
+                        <span class="badge-crop" id="diagCropBadge">🍅 Tomato</span>
+                        <span class="badge-severity moderate" id="diagSeverityBadge">
+                            <i class='bx bx-pulse'></i> Severity: Moderate
+                        </span>
+                        <span class="badge-conf" id="diagConfidenceBadge">97.4% Confidence</span>
+                    </div>
+                </div>
+
+                <div class="diag-grid">
+                    <div class="diag-info-box">
+                        <h4><i class='bx bx-search-alt-2'></i> Observed Symptoms & Pathology</h4>
+                        <p id="diagSymptomsText">Dark brown spots with concentric target-board rings on older leaves. Yellow halos surrounding necrotic tissue.</p>
+                    </div>
+                    <div class="diag-info-box">
+                        <h4><i class='bx bx-info-circle'></i> Biological Causes & Risk Factors</h4>
+                        <p id="diagCausesText">Fungal pathogen surviving in crop debris. Spreads during warm temperatures (24-29°C) with persistent leaf wetness or overhead irrigation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             SECTION 4: RECOMMENDED ACTIONS FOR FARMERS
+             ========================================== -->
+        <section id="recommendations" class="section-wrapper hidden">
+            <div class="section-header">
+                <span class="section-category"><i class='bx bx-first-aid'></i> Agronomic Advisory</span>
+                <h2 class="section-title">Recommended Actions for Farmers</h2>
+                <p class="section-subtitle">Specific, crop-tailored emergency containment, organic remedies, and expert thresholds</p>
+            </div>
+
+            <div class="actions-grid">
+                <!-- Card 1: Immediate Action -->
+                <div class="action-card immediate">
+                    <div class="action-card-header">
+                        <div class="action-icon"><i class='bx bx-alarm-exclamation'></i></div>
+                        <div class="action-card-title">Immediate Field Actions</div>
+                    </div>
+                    <ul class="action-list" id="actionImmediateList">
+                        <li>Prune lower infected foliage immediately using sanitized shears.</li>
+                        <li>Do not handle wet foliage to avoid transferring bacterial/fungal spores.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: Organic Treatment -->
+                <div class="action-card organic">
+                    <div class="action-card-header">
+                        <div class="action-icon"><i class='bx bx-leaf'></i></div>
+                        <div class="action-card-title">Organic & Bio-Control Options</div>
+                    </div>
+                    <ul class="action-list" id="actionOrganicList">
+                        <li>Apply certified bio-fungicides based on Bacillus subtilis strains.</li>
+                        <li>Use OMRI-listed copper octanoate foliar spray early in the morning.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3: Treatment Methods -->
+                <div class="action-card treatment">
+                    <div class="action-card-header">
+                        <div class="action-icon"><i class='bx bx-test-tube'></i></div>
+                        <div class="action-card-title">Recommended Treatment Methods</div>
+                    </div>
+                    <ul class="action-list" id="actionTreatmentList">
+                        <li>Ensure thorough spray coverage on both upper and lower leaf surfaces.</li>
+                        <li>Follow product-label directions and local extension guidelines; avoid inventing chemical dosages.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 4: Irrigation & Fertilizer -->
+                <div class="action-card irrigation">
+                    <div class="action-card-header">
+                        <div class="action-icon"><i class='bx bx-water'></i></div>
+                        <div class="action-card-title">Irrigation & Fertilizer Management</div>
+                    </div>
+                    <ul class="action-list" id="actionIrrigationList">
+                        <li>Switch from overhead sprinklers to root-level drip irrigation.</li>
+                        <li>Avoid excessive nitrogen which promotes soft, vulnerable tissue.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 5: Prevention -->
+                <div class="action-card prevention">
+                    <div class="action-card-header">
+                        <div class="action-icon"><i class='bx bx-shield-quarter'></i></div>
+                        <div class="action-card-title">Long-Term Prevention Techniques</div>
+                    </div>
+                    <ul class="action-list" id="actionPreventionList">
+                        <li>Implement a 3-year non-solanaceous crop rotation.</li>
+                        <li>Apply organic mulch to suppress rain splash from soil.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 6: Expert Consultation -->
+                <div class="action-card expert">
+                    <div class="action-card-header">
+                        <div class="action-icon"><i class='bx bx-user-voice'></i></div>
+                        <div class="action-card-title">When to Consult an Expert</div>
+                    </div>
+                    <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.5;" id="actionExpertText">
+                        Contact your local Krishi Vigyan Kendra (KVK) or extension specialist if symptoms expand across more than 15% of the total canopy within 48 hours.
+                    </p>
+                </div>
+            </div>
+
+            <div class="label-disclaimer">
+                <i class='bx bx-info-circle' style="font-size:1.2rem; color:var(--primary);"></i>
+                <span><strong>Agronomic Notice:</strong> Any chemical treatments must strictly follow manufacturer product-label directions and local agricultural university recommendations. Never guess unverified dosages.</span>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             SECTION 5: INTEGRATED UAV DRONE MONITORING
+             ========================================== -->
+        <section id="uav-monitoring" class="section-wrapper">
+            <div class="section-header">
+                <span class="section-category"><i class='bx bxs-navigation'></i> Aerial GIS Surveillance</span>
+                <h2 class="section-title">UAV Drone Monitoring Panel</h2>
+                <p class="section-subtitle">Autonomous aerial flight mission synchronized directly to your detected crop disease</p>
+            </div>
+
+            <div class="drone-unified-panel">
+                <!-- Connected Target Banner -->
+                <div class="connected-target-banner">
+                    <div class="target-info-group">
+                        <div class="target-radar-icon">
+                            <i class='bx bx-radar'></i>
+                        </div>
+                        <div class="target-details">
+                            <h4 id="uavTargetHeading">Target: Sector C - Tomato Test Plot Alpha</h4>
+                            <p id="uavTargetSub">Detected Issue: <strong id="uavTargetDisease">Tomato Early Blight</strong> • Status: <span id="uavTargetStatus">Monitoring Scheduled</span></p>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="gps-badge-simulated" id="gpsTypeBadge">
+                            <i class='bx bx-crosshair'></i> Simulated GPS Coordinates
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Farmer Field Location Customizer -->
+                <div class="field-location-picker">
+                    <div class="location-picker-label">
+                        <i class='bx bx-map-pin'></i> Field Sector Location:
+                    </div>
+                    <div class="location-picker-controls">
+                        <select id="sectorSelect" class="location-select">
+                            <option value="potato_north">Sector A - Potato North Field (28.61420, 77.20890)</option>
+                            <option value="potato_east">Sector B - Potato East Buffer (28.61480, 77.21030)</option>
+                            <option value="tomato_alpha" selected>Sector C - Tomato Test Plot Alpha (28.61560, 77.20960)</option>
+                            <option value="tomato_south">Sector D - Tomato Southern Row (28.61510, 77.20810)</option>
+                            <option value="pepper_central">Sector E - Bell Pepper Central (28.61460, 77.20780)</option>
+                            <option value="custom">Enter Custom GPS Coordinates...</option>
+                        </select>
+                        <input type="number" id="customLatInput" class="coord-input hidden" placeholder="Latitude" step="0.00001" style="width:110px;">
+                        <input type="number" id="customLngInput" class="coord-input hidden" placeholder="Longitude" step="0.00001" style="width:110px;">
+                        <button class="btn-update-loc" id="btnUpdateLocation">
+                            <i class='bx bx-check'></i> Set Field Target
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Real-Time Telemetry HUD Strip -->
+                <div class="telemetry-hud-strip">
+                    <div class="hud-stat-box">
+                        <i class='bx bx-broadcast hud-stat-icon'></i>
+                        <div>
+                            <div class="hud-stat-label">UAV Callsign</div>
+                            <div class="hud-stat-val" id="hudCallsign">UAV-01</div>
+                        </div>
+                    </div>
+                    <div class="hud-stat-box">
+                        <i class='bx bx-compass hud-stat-icon'></i>
+                        <div>
+                            <div class="hud-stat-label">Mission Status</div>
+                            <div class="hud-stat-val">
+                                <span class="status-indicator-badge standby" id="hudStatusBadge">STANDBY</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hud-stat-box">
+                        <i class='bx bx-up-arrow-alt hud-stat-icon'></i>
+                        <div>
+                            <div class="hud-stat-label">Altitude (AGL)</div>
+                            <div class="hud-stat-val" id="hudAltitudeVal">0.0 m</div>
+                        </div>
+                    </div>
+                    <div class="hud-stat-box">
+                        <i class='bx bx-tachometer hud-stat-icon'></i>
+                        <div>
+                            <div class="hud-stat-label">Ground Speed</div>
+                            <div class="hud-stat-val" id="hudSpeedVal">0.0 m/s</div>
+                        </div>
+                    </div>
+                    <div class="hud-stat-box">
+                        <i class='bx bx-battery hud-stat-icon'></i>
+                        <div>
+                            <div class="hud-stat-label">Battery Level</div>
+                            <div class="hud-stat-val" id="hudBatteryVal">98%</div>
+                        </div>
+                    </div>
+                    <div class="hud-stat-box">
+                        <i class='bx bx-satellite hud-stat-icon'></i>
+                        <div>
+                            <div class="hud-stat-label">GPS Fix Lock</div>
+                            <div class="hud-stat-val" id="hudGpsVal">14 Sats</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leaflet GIS Map Frame -->
+                <div class="map-frame-wrapper">
+                    <div id="unifiedFieldMap"></div>
+                    <!-- Map Live Overlay -->
+                    <div class="map-live-overlay">
+                        <div class="overlay-item"><span class="overlay-lbl">LAT:</span><span class="overlay-val" id="mapOverlayLat">28.613500</span></div>
+                        <div class="overlay-item"><span class="overlay-lbl">LNG:</span><span class="overlay-val" id="mapOverlayLng">77.208500</span></div>
+                        <div class="overlay-item"><span class="overlay-lbl">HEADING:</span><span class="overlay-val" id="mapOverlayHeading">045° NE</span></div>
+                        <div class="overlay-item"><span class="overlay-lbl">MODE:</span><span class="overlay-val" id="mapOverlayMode">CONNECTED</span></div>
+                    </div>
+                </div>
+
+                <!-- Flight Actions Control Bar -->
+                <div class="flight-actions-bar">
+                    <button class="btn-flight start" id="btnLaunchMission">
+                        <i class='bx bx-play-circle'></i> Start UAV Survey Mission
+                    </button>
+                    <button class="btn-flight pause" id="btnPauseMission">
+                        <i class='bx bx-pause-circle'></i> Pause Mission
+                    </button>
+                    <button class="btn-flight complete" id="btnCompleteMission">
+                        <i class='bx bx-check-circle'></i> Complete Mission
+                    </button>
+                    <button class="btn-flight reset" id="btnResetMission">
+                        <i class='bx bx-reset'></i> Reset UAV to Base
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             SECTION 6: DETECTION HISTORY
+             ========================================== -->
+        <section id="history" class="section-wrapper">
+            <div class="section-header" style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px;">
+                <div>
+                    <span class="section-category"><i class='bx bx-history'></i> Diagnostic Audit</span>
+                    <h2 class="section-title">Detection & UAV Mission History</h2>
+                    <p class="section-subtitle">Complete log of uploaded leaves, AI diagnoses, severity metrics, and flight statuses</p>
+                </div>
+                <button class="btn-secondary" id="btnClearHistory" style="padding:6px 14px; font-size:0.8rem;">
+                    <i class='bx bx-trash'></i> Clear History
+                </button>
+            </div>
+
+            <div class="history-card">
+                <div class="history-table-wrapper">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Specimen</th>
+                                <th>Crop</th>
+                                <th>Disease Diagnosis</th>
+                                <th>Severity</th>
+                                <th>Confidence</th>
+                                <th>Field Sector</th>
+                                <th>Date & Time</th>
+                                <th>Drone Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTableBody">
+                            <tr>
+                                <td colspan="9" style="text-align:center; padding:2.5rem; color:var(--text-muted);">
+                                    <i class='bx bx-folder-open' style="font-size:2rem; display:block; margin-bottom:6px;"></i>
+                                    No detection records logged yet. Upload a leaf image to generate your first precision diagnosis and UAV mission.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Leaflet GIS Map Library -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="/static/app.js"></script>
 </body>
 </html>
